@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'org.base'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.flipkart.utils:javatuples:3.0'
+    implementation 'commons-cli:commons-cli:1.5.0'
+    implementation 'mysql:mysql-connector-java:8.0.29'
+    implementation 'org.liquibase:liquibase-core:4.16.1'
+    implementation 'org.yaml:snakeyaml:1.32'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.base.migrate.MigrateApplication'
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}

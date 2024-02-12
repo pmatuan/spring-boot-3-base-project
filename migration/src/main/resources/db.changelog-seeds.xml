@@ -1,0 +1,19 @@
+<?xml version="1.1" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.3.xsd">
+    <changeSet author="TuanPMA" id="1697163349069-00">
+        <tagDatabase tag="db_main_seeds"/>
+    </changeSet>
+
+    <changeSet author="TuanPMA" id="1697163349064-01">
+        <loadData file="seeds/example.csv" tableName="example">
+            <column header="id" name="id" type="NUMERIC"/>
+            <column header="description" name="description" type="STRING"/>
+            <column header="created_at" name="created_at" type="STRING"/>
+            <column header="created_by" name="created_by" type="STRING"/>
+        </loadData>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>

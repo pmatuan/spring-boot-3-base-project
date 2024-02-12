@@ -1,0 +1,27 @@
+<?xml version="1.1" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet id="1697163349064-00" author="TuanPMA">
+        <tagDatabase tag="1.0"/>
+    </changeSet>
+
+    <changeSet author="TuanPMA" id="1697163349064-1">
+        <sql>
+            CREATE TABLE if not exist example (
+                id int not null primary key AUTO_INCREMENT,
+                description varchar(255),
+                created_at timestamp default ,
+                created_by varchar(50)
+            );
+        </sql>
+
+        <rollback>
+            <sql>
+                drop table example;
+            </sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

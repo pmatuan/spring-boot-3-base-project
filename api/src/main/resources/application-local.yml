@@ -1,0 +1,67 @@
+server:
+  port: ${SERVER_PORT:8080}
+
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,application/json
+    min-response-size: 1024
+
+spring:
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/example
+    username: root
+    password: abc123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      minimumIdle: ${HIRAKI_MINIMUM_IDLE:10}
+      maximumPoolSize: ${HIRAKI_MAXIMUM_POOL_SIZE:10}
+      idleTimeout: ${HIRAKI_IDLE_TIMEOUT:600000}
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+  application:
+    name: ${APPLICATION_NAME:base-api}
+
+  main:
+    allow-circular-references: true
+
+logging:
+  pattern:
+    level: "trace_id=%mdc{trace_id} span_id=%mdc{span_id} trace_flags=%mdc{trace_flags} %p"
+  level:
+    org.base.api: DEBUG
+    org.apache: OFF
+    kafka: OFF
+
+management:
+
+  endpoints:
+    web:
+      exposure:
+        include: prometheus
+
+  metrics:
+    tags:
+      application: app
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: 'true'
+
+kafka:
+  addresses: ${KAFKA_ADDRESSES:localhost:9092}
+  send-notification-topic: ${KAFKA_EXAMPLE_TOPIC:example}
+  example-topic: ${KAFKA_EXAMPLE_TOPIC:example}

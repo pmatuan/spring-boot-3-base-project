@@ -1,0 +1,6 @@
+rootProject.name = 'spring-boot-3-base-project'
+include 'api'
+include 'consumer'
+include 'shared'
+include 'migration'
+
